@@ -17,7 +17,7 @@ export const Table = () => {
         rowClassName={rowData => {
           if (rowData.isRead === false) return 'bg-blue-500';
         }}
-        rows={15}
+        rows={14}
         tableStyle={{ minWidth: '50rem' }}
         scrollHeight="95vh"
         dataKey="id"
