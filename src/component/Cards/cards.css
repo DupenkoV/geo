@@ -1,0 +1,16 @@
+.cardListWrapper {
+  padding: 10px 30px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 30px;
+}
+
+.eventCard {
+  width: 30%;
+  min-height: 30px;
+}
+
+.blue {
+  background-color: lightblue;
+}
