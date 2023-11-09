@@ -11,8 +11,8 @@ const initialState: event[] = [
     }),
     importance: Important.high,
     equipment: 'Cisco',
-    message: 'Выкинуть',
-    responsibility: 'К.В. Дупенко',
+    message: 'Проверить порты',
+    responsibility: 'К.В. Карпенко',
     isRead: false,
     id: nanoid(),
   },
@@ -23,8 +23,8 @@ const initialState: event[] = [
       second: 'numeric',
     }),
     importance: Important.high,
-    equipment: 'Cisco',
-    message: 'Выкинуть',
+    equipment: 'МФУ HP',
+    message: 'Заправить картридж',
     responsibility: 'К.В. Дупенко',
     isRead: false,
     id: nanoid(),
@@ -35,6 +35,21 @@ const messagesSlice = createSlice({
   name: '@@message',
   initialState,
   reducers: {
+    addEvent: state => {
+      state.push({
+        date: new Date().toLocaleDateString('ru-Ru', {
+          hour: 'numeric',
+          minute: 'numeric',
+          second: 'numeric',
+        }),
+        importance: Important.high,
+        equipment: 'Cisco',
+        message: 'Проверить порты',
+        responsibility: 'К.В. Карпенко',
+        isRead: false,
+        id: nanoid(),
+      });
+    },
     changeReadStatus: (state, action) => {
       return state.map(item => {
         if (item.id === action.payload) {
@@ -50,4 +65,4 @@ const messagesSlice = createSlice({
 });
 
 export const messagesReducer = messagesSlice.reducer;
-export const { changeReadStatus } = messagesSlice.actions;
+export const { changeReadStatus, addEvent } = messagesSlice.actions;
