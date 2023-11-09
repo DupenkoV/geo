@@ -10,5 +10,6 @@ export interface event {
   equipment: string;
   message: string;
   responsibility: string;
-  isRead?: false;
+  isRead: boolean;
+  id: string;
 }
