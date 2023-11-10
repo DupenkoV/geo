@@ -2,17 +2,21 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import 'primereact/resources/themes/lara-light-indigo/theme.css';
 import './table.css';
-import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks';
+import { useAppDispatch } from '../../hooks/reduxHooks';
 import { changeReadStatus } from '../../slices/messagesSlice';
+import type { eventMessage } from '../../types/types';
 
-export const Table = () => {
-  const massagesList = useAppSelector(state => state.messages);
+interface TableProp {
+  messageList: eventMessage[];
+}
+
+export const Table: React.FC<TableProp> = ({ messageList }) => {
   const dispatch = useAppDispatch();
 
   return (
     <div className="card">
       <DataTable
-        value={massagesList}
+        value={messageList}
         paginator
         rowClassName={rowData => {
           if (rowData.isRead === false) return 'bg-blue-500';

@@ -4,7 +4,7 @@ export enum Important {
   low = 'Низкая',
 }
 
-export interface event {
+export interface eventMessage {
   date: string;
   importance: Important;
   equipment: string;

@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { event, Important } from '../types/types';
+import { eventMessage, Important } from '../types/types';
 import { nanoid } from '@reduxjs/toolkit';
 
-const initialState: event[] = [
+const initialState: eventMessage[] = [
   {
     date: new Date().toLocaleDateString('ru-Ru', {
       hour: 'numeric',

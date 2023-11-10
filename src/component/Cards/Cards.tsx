@@ -1,31 +1,37 @@
 import { Card } from 'primereact/card';
-import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks';
+import { useAppDispatch } from '../../hooks/reduxHooks';
 import './cards.css';
-import { event } from '../../types/types';
-import React, { useState, useEffect } from 'react';
+import { eventMessage } from '../../types/types';
+import { useState, useEffect } from 'react';
 import { Paginator, PaginatorPageChangeEvent } from 'primereact/paginator';
 import { changeReadStatus } from '../../slices/messagesSlice';
 
-export const EventCard = () => {
+interface EventCardProp {
+  messageList: eventMessage[];
+}
+
+export const EventCard: React.FC<EventCardProp> = ({ messageList }) => {
   const [first, setFirst] = useState(0);
   const [rows, setRows] = useState(9);
   const [activeCard, setActiveCard] = useState('');
   const dispatch = useAppDispatch();
 
+  //Внесение изменений в стейт, необходимых для пагинации
   const onPageChange = (event: PaginatorPageChangeEvent) => {
     setFirst(event.first);
     setRows(event.rows);
   };
 
-  const messageList = useAppSelector(state => state.messages);
-
-  const className = (item: event) => {
+  //Присвоение класса карточке события для визуализации активно/непрочитано/прочитано
+  const className = (item: eventMessage) => {
     if (item.id === activeCard && item.isRead === false) {
       return 'eventCard blue active';
     }
+
     return item.isRead ? 'eventCard' : 'eventCard blue';
   };
 
+  //Отслеживание нажатия пробела для изменения статуса на "прочитано"
   useEffect(() => {
     const handleSpaceDelete = (e: KeyboardEvent) => {
       if (e.key === ' ' && activeCard) {
@@ -34,11 +40,13 @@ export const EventCard = () => {
       }
     };
     document.addEventListener('keydown', handleSpaceDelete);
+
     return () => {
       document.removeEventListener('keydown', handleSpaceDelete);
     };
   }, [activeCard, dispatch]);
 
+  //Отслеживание клика мышки для отмены статуса активности карточки
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (!(event.target as HTMLElement).closest('.eventCard')) {
@@ -46,10 +54,12 @@ export const EventCard = () => {
       }
     };
     window.addEventListener('click', handleClickOutside);
+
     return () => {
       window.removeEventListener('click', handleClickOutside);
     };
   }, []);
+
   return (
     <>
       <div className="cardListWrapper">

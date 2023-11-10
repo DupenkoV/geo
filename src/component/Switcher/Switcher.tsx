@@ -6,11 +6,14 @@ import './switcher.css';
 export const Switcher = () => {
   const switcherDisplay = useAppSelector(state => state.display);
   const dispatch = useAppDispatch();
+
+  //Присвоение кнопке класса в зависимости от стиля отображения приложения(карточки или таблица)
   const className = (item: string) => {
     if (switcherDisplay !== item) {
       return 'inactive-button';
     }
   };
+
   return (
     <div>
       <Button
