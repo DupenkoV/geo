@@ -9,7 +9,7 @@ export const SearchInput = () => {
 
   useEffect(() => {
     dispatch(addMessageSearch(value));
-  }, [value]);
+  }, [value, dispatch]);
   return (
     <div>
       <InputText

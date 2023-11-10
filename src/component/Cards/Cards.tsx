@@ -5,6 +5,7 @@ import { eventMessage } from '../../types/types';
 import { useState, useEffect } from 'react';
 import { Paginator, PaginatorPageChangeEvent } from 'primereact/paginator';
 import { changeReadStatus } from '../../slices/messagesSlice';
+import { useDoubleTap } from 'use-double-tap';
 
 interface EventCardProp {
   messageList: eventMessage[];
@@ -15,6 +16,11 @@ export const EventCard: React.FC<EventCardProp> = ({ messageList }) => {
   const [rows, setRows] = useState(9);
   const [activeCard, setActiveCard] = useState('');
   const dispatch = useAppDispatch();
+
+  //Хук, необходимый для отработки события двойного тапа по карточке
+  const doubleTap = useDoubleTap(e => {
+    dispatch(changeReadStatus(activeCard));
+  });
 
   //Внесение изменений в стейт, необходимых для пагинации
   const onPageChange = (event: PaginatorPageChangeEvent) => {
@@ -62,7 +68,7 @@ export const EventCard: React.FC<EventCardProp> = ({ messageList }) => {
 
   return (
     <>
-      <div className="cardListWrapper">
+      <div className="cardListWrapper" {...doubleTap}>
         {messageList.slice(first, first + rows).map(item => {
           return (
             <Card

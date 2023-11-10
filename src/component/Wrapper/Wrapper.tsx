@@ -8,7 +8,7 @@ import { SearchInput } from '../SearchInput/SearchInput';
 import './wrapper.css';
 
 export const Wrapper = () => {
-  let messageList = useAppSelector(state => state.messages);
+  const messageList = useAppSelector(state => state.messages);
   const [renderMessage, setRenderMessage] = useState(messageList);
   const searchText = useAppSelector(state => state.searchMessage);
   const switcher = useAppSelector(state => state.display);
