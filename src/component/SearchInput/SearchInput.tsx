@@ -14,6 +14,7 @@ export const SearchInput = () => {
     <div>
       <InputText
         value={value}
+        placeholder="Поиск сообщения"
         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
           setValue(e.target.value)
         }

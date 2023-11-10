@@ -22,3 +22,22 @@
 .active {
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
+
+@media (min-width: 375px) and (max-width: 870px) {
+  .cardListWrapper {
+    padding: 10px;
+  }
+  .eventCard {
+    width: 45%;
+  }
+}
+
+@media (max-width: 580px) {
+  .cardListWrapper {
+    padding: 10px;
+    justify-content: center;
+  }
+  .eventCard {
+    width: 80%;
+  }
+}
