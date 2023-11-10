@@ -34,11 +34,12 @@ export const Table: React.FC<TableProp> = ({ messageList }) => {
         rowClassName={rowData => {
           if (rowData.isRead === false) return 'bg-blue-500';
         }}
-        rows={14}
+        rows={9}
         tableStyle={{ minWidth: '50rem' }}
         scrollHeight="95vh"
         dataKey="id"
-        showGridlines>
+        showGridlines
+        style={{ backgroundColor: 'lightgray' }}>
         <Column field="date" header="Дата" style={{ width: '10%' }}></Column>
         <Column
           field="importance"
@@ -51,7 +52,7 @@ export const Table: React.FC<TableProp> = ({ messageList }) => {
         <Column
           field="message"
           header="Сообщение"
-          style={{ width: '35%' }}
+          style={{ width: '40%' }}
           sortable></Column>
         <Column
           field="responsibility"
@@ -61,7 +62,7 @@ export const Table: React.FC<TableProp> = ({ messageList }) => {
         <Column
           body={item => buttonChangeReadStatus(item)}
           header="Статус"
-          style={{ width: '25%' }}
+          style={{ width: '20%' }}
           sortable></Column>
       </DataTable>
     </div>

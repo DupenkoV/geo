@@ -90,6 +90,7 @@ export const EventCard: React.FC<EventCardProp> = ({ messageList }) => {
           rows={rows}
           totalRecords={messageList.length}
           onPageChange={onPageChange}
+          style={{ backgroundColor: 'lightgray' }}
         />
       </div>
     </>
