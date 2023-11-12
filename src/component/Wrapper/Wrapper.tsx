@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Switcher } from '../Switcher/Switcher';
 import { EventCard } from '../Cards/Cards';
 import { Table } from '../Table/Table';
@@ -11,11 +11,12 @@ export const Wrapper = () => {
   const messageList = useAppSelector(state => state.messages);
   const [renderMessage, setRenderMessage] = useState(messageList);
   const searchText = useAppSelector(state => state.searchMessage);
-  const switcher = useAppSelector(state => state.display);
+  const switcher = useAppSelector(state => state.displayStyle);
   const dispatch = useAppDispatch();
 
   //Фильтрация списка событий
-  useEffect(() => {
+
+  const filterMessages = useCallback(() => {
     const result = messageList.filter(item => {
       if (searchText.length === 0) {
         return item;
@@ -25,6 +26,10 @@ export const Wrapper = () => {
     });
     setRenderMessage(result);
   }, [searchText, messageList]);
+
+  useEffect(() => {
+    filterMessages();
+  }, [filterMessages]);
 
   const displayStyle =
     switcher === 'Table' ? (

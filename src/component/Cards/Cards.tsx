@@ -2,7 +2,7 @@ import { Card } from 'primereact/card';
 import { useAppDispatch } from '../../hooks/reduxHooks';
 import './cards.css';
 import { eventMessage } from '../../types/types';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Paginator, PaginatorPageChangeEvent } from 'primereact/paginator';
 import { changeReadStatus } from '../../slices/messagesSlice';
 import { useDoubleTap } from 'use-double-tap';
@@ -38,27 +38,31 @@ export const EventCard: React.FC<EventCardProp> = ({ messageList }) => {
   };
 
   //Отслеживание нажатия пробела для изменения статуса на "прочитано"
-  useEffect(() => {
-    const handleSpaceDelete = (e: KeyboardEvent) => {
+  const handleSpaceDelete = useCallback(
+    (e: KeyboardEvent) => {
       if (e.key === ' ' && activeCard) {
         dispatch(changeReadStatus(activeCard));
         setActiveCard('');
       }
-    };
+    },
+    [dispatch, activeCard]
+  );
+
+  useEffect(() => {
     document.addEventListener('keydown', handleSpaceDelete);
 
     return () => {
       document.removeEventListener('keydown', handleSpaceDelete);
     };
-  }, [activeCard, dispatch]);
-
+  }, [handleSpaceDelete]);
   //Отслеживание клика мышки для отмены статуса активности карточки
+  const handleClickOutside = (event: MouseEvent) => {
+    if (!(event.target as HTMLElement).closest('.eventCard')) {
+      setActiveCard('');
+    }
+  };
+
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (!(event.target as HTMLElement).closest('.eventCard')) {
-        setActiveCard('');
-      }
-    };
     window.addEventListener('click', handleClickOutside);
 
     return () => {

@@ -4,7 +4,7 @@ import { switchDisplay } from '../../slices/displaySlice';
 import './switcher.css';
 
 export const Switcher = () => {
-  const switcherDisplay = useAppSelector(state => state.display);
+  const switcherDisplay = useAppSelector(state => state.displayStyle);
   const dispatch = useAppDispatch();
 
   //Присвоение кнопке класса в зависимости от стиля отображения приложения(карточки или таблица)

@@ -6,7 +6,7 @@ import { searchReducer } from '../slices/searchSlice';
 export const store = configureStore({
   reducer: {
     messages: messagesReducer,
-    display: displayReducer,
+    displayStyle: displayReducer,
     searchMessage: searchReducer,
   },
 });
